@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 cors({
-   origin: ["http://localhost:5173", "https://global-trend-frontend.vercel.app"],
+   origin: "http://localhost:5173"|| "https://global-trend-frontend.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
