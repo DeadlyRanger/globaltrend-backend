@@ -9,24 +9,38 @@ dotenv.config();
 
 const app = express();
 
-cors({
-   origin: "http://localhost:5173"|| "https://global-trend-frontend.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://global-trend-frontend.vercel.app"
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
+);
+
+app.options("*", cors());
+
+/* ====================== */
+
 app.use(express.json());
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
   res.send("Backend Running");
 });
 
-app.use("/api/auth",authRoutes);
-app.use("/api/tasks",taskRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
-const start = async()=>{
+const start = async () => {
   await dbConnect();
 
-  app.listen(process.env.PORT,()=>{
+  app.listen(process.env.PORT || 5000, () => {
     console.log("Server started");
   });
 };
