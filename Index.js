@@ -11,14 +11,11 @@ const app = express();
 
 
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://global-trend-frontend.vercel.app"
-];
+
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
